@@ -3,7 +3,31 @@ const ytdl = require("ytdl-core");
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+// Configure CORS
+const allowedOrigins = [
+    'https://listen-like.onrender.com', // Your PRODUCTION Flutter frontend URL
+    'https://listen-like.onrender.com/',
+    'http://localhost',
+    // Add the specific port Flutter web server uses locally if needed
+    // 'http://localhost:55363'
+];
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests) OR
+        // allow requests from specified origins
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            console.warn(`CORS: Blocked origin: ${origin}`); // Log blocked origins
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: "GET", // Only allow GET method needed for this API
+    // optionsSuccessStatus: 200 // some legacy browsers choke on 204
+};
+
+app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
     const ping = new Date();
@@ -86,5 +110,5 @@ app.get("/mp4", async (req, res) => {
 });
 
 app.listen(process.env.PORT || 3500, () => {
-    console.log("Server on");
+    console.log(`Server running on port ${PORT}`);
 });

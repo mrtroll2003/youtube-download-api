@@ -11,6 +11,9 @@
         "type": "git",
         "url": "git+https://github.com/MatheusIshiyama/youtube-download-api.git"
     },
+    "engines": {
+        "node": ">=22.15.0"
+      },
     "author": "",
     "license": "ISC",
     "bugs": {
@@ -20,7 +23,7 @@
     "dependencies": {
         "cors": "^2.8.5",
         "express": "^4.17.1",
-        "ytdl-core": "^4.5.0"
+        "ytdl-core": "^4.11.5"
     },
     "devDependencies": {}
 }
