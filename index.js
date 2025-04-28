@@ -108,7 +108,7 @@ app.get("/mp4", async (req, res) => {
         res.status(400).send("Invalid query");
     }
 });
-
-app.listen(process.env.PORT || 3500, () => {
+const PORT = process.env.PORT || 3500;
+app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
